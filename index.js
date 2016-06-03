@@ -62,7 +62,7 @@ app.listen(app.get('port'));
 app.use(bodyParser.json());
 
 // Webhook setup
-app.get('/', (req, res) => {
+app.get('/fb', (req, res) => {
     if (!FB_VERIFY_TOKEN) {
         throw new Error('missing FB_VERIFY_TOKEN');
     }
@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
 });
 
 // Message handler
-app.post('/', (req, res) => {
+app.post('/fb', (req, res) => {
     // Parsing the Messenger API response
     const messaging = getFirstMessagingEntry(req.body);
     if (messaging && messaging.recipient.id === FB_PAGE_ID) {
