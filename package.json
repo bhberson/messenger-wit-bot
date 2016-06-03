@@ -18,8 +18,6 @@
   "repository": "https://github.com/bhberson/messenger-wit-bot",
   "author": "Brody Berson <brody.berson@me.com>",
   "dependencies": {
-    "node-fetch": "^1.5.1",
-    "node-uuid": "^1.4.7",
     "request": "^2.71.0",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
