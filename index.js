@@ -100,6 +100,18 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
 // Our bot actions
 const actions = {
   say(sessionId, context, message, cb) {
@@ -134,7 +146,12 @@ const actions = {
   error(sessionId, context, error) {
     console.log(error.message);
   },
-  // CUSTOM ACTIONS HERE
+  ['blank'](sessionId, context, cb) {
+    // Herer is where an API call would go
+    // context.return = apiCall(context.loc);
+    context.return = 'return String';
+    cb(context);
+  }
 };
 
 // Setting up our bot
