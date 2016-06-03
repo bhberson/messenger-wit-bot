@@ -1,0 +1,28 @@
+{
+  "name": "messenger-wit-bot",
+  "version": "1.0.0",
+  "description": "NodeJS bot using Wit.ai and Facebook Messenger",
+  "keywords": [
+    "wit",
+    "wit.ai",
+    "bot",
+    "bots",
+    "Facebook",
+    "Messenger"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": "https://github.com/bhberson/messenger-wit-bot",
+  "author": "Brody Berson <brody.berson@me.com>",
+  "dependencies": {
+    "node-fetch": "^1.5.1",
+    "node-uuid": "^1.4.7",
+    "request": "^2.71.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "node-wit": "^3.3.0"
+  }
+}
