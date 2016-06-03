@@ -39,14 +39,26 @@ const getFirstMessagingEntry = (body) => {
     return val || null;
 };
 
+// This will contain all user sessions.
+// Each session has an entry:
+// sessionId -> {fbid: facebookUserId, context: sessionState}
 const sessions = {};
-const findOrCreateSession = (sessions, fbid, cb) => {
 
-    if (!sessions[fbid]) {
-        console.log("New Session for:", fbid);
-        sessions[fbid] = session;
-        cb(sessions, fbid);
+const findOrCreateSession = (fbid) => {
+  let sessionId;
+  // Let's see if we already have a session for the user fbid
+  Object.keys(sessions).forEach(k => {
+    if (sessions[k].fbid === fbid) {
+      // Yep, got it!
+      sessionId = k;
     }
+  });
+  if (!sessionId) {
+    // No session found for user fbid, let's create a new one
+    sessionId = new Date().toISOString();
+    sessions[sessionId] = {fbid: fbid, context: {}};
+  }
+  return sessionId;
 };
 
 // Wit.ai bot specific code
@@ -128,7 +140,6 @@ app.post('/fb', (req, res) => {
 
                                 // Updating the user's current session state
                                 sessions[sessionId].context = context;
-                                connection.query("UPDATE session SET context=? WHERE fbid=?", [JSON.stringify(sessions[sessionId]), sessionId]);
                             }
                         }
                     );
